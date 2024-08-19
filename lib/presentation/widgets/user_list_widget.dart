@@ -22,7 +22,7 @@ class UserListWidget extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UserProfileScreen(user: user),
+                builder: (context) => UserProfileScreen(),
               ),
             );
           },

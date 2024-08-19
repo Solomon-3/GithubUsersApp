@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:githubUsers/domain/entities/user_list_entity.dart';
 import '../entities/user.dart';
 import '../repositories/user_repository.dart';
 
@@ -7,7 +8,7 @@ class SearchUserByUsername {
 
   SearchUserByUsername(this.repository);
 
-  Future<Either<Exception, User>> call(String username, int page) {
-    return repository.searchUsersByUsername(username, page);
+  Future<Either<Exception, List<UserListEntity>>> call(String name) {
+    return repository.searchUsersByUsername(name);
   }
 }

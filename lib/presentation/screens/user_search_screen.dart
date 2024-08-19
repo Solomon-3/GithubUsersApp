@@ -21,6 +21,18 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
   final TextEditingController _usernameController = TextEditingController();
   bool _isLocationSearch = true;
 
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<UserProvider>(context, listen: false)
+          .searchUsers(context, _locationController.text);
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +142,7 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
                                                 UserRemoteDataSourceImpl(
                                                     client:
                                                     http.Client()))))..fetchUserDetail(user.login),
-                                    child: UserProfileScreen(user: user),
+                                    child: UserProfileScreen(),
                                   ),
                                 ),
                               );
