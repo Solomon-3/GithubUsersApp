@@ -1,4 +1,3 @@
-// domain/entities/user.dart
 class User {
   final String login;
   final String avatarUrl;

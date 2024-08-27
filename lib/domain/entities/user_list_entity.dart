@@ -1,4 +1,3 @@
-// domain/entities/userlistentity.dart
 import 'package:githubUsers/domain/entities/user.dart';
 
 class UserListEntity {

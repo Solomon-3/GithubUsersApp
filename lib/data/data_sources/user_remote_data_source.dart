@@ -1,30 +1,19 @@
 import 'dart:convert';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import '../models/user_list_model.dart';
 import '../models/user_model.dart';
 
 abstract class UserRemoteDataSource {
-  Future<UserModel> getUser(int id);
   Future<List<UserListModel>> searchUsersByLocation(String location, int page);
   Future<UserModel> getUserDetail(String username);
   Future<List<UserListModel>> searchUserByUsername(String name);
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
-  final http.Client client;
+  final http.Client client = GetIt.instance<http.Client>();
 
-  UserRemoteDataSourceImpl({required this.client});
-
-  @override
-  Future<UserModel> getUser(int id) async {
-    final response = await client.get(Uri.parse('https://api.github.com/users/$id'));
-
-    if (response.statusCode == 200) {
-      return UserModel.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load User');
-    }
-  }
+  //UserRemoteDataSourceImpl({required this.client});
 
   @override
   Future<List<UserListModel>> searchUsersByLocation(String location, int page) async {
@@ -63,5 +52,4 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       throw Exception('Failed to load User');
     }
   }
-
 }

@@ -33,14 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Text(
-              //   'GitHub Users',
-              //   style: TextStyle(
-              //     fontSize: 30,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.white,
-              //   ),
-              // ),
               SizedBox(height: 20),
               CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -52,6 +44,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-
-

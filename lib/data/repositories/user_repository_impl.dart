@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:get_it/get_it.dart';
 import 'package:githubUsers/domain/entities/user_list_entity.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -6,19 +7,9 @@ import '../../data/data_sources/user_remote_data_source.dart';
 import '../models/user_model.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final UserRemoteDataSource remoteDataSource;
+  final UserRemoteDataSource remoteDataSource = GetIt.instance<UserRemoteDataSource>();
 
-  UserRepositoryImpl({required this.remoteDataSource});
-
-  @override
-  Future<Either<Exception, User>> getUser(int id) async {
-    try {
-      final model = await remoteDataSource.getUser(id);
-      return Right(model.toEntity());
-    } catch (e) {
-      return Left(Exception('Failed to fetch data'));
-    }
-  }
+  //UserRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<Either<Exception, List<UserListEntity>>> searchUsersByLocation(String location, int page) async {

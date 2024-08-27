@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dartz/dartz.dart';
+import 'package:get_it/get_it.dart';
 import 'package:githubUsers/domain/entities/user_list_entity.dart';
 import '../../domain/use_cases/search_user_by_location.dart';
 //import '../../domain/entities/user.dart';
@@ -9,8 +10,8 @@ import '../../domain/use_cases/search_user_by_username.dart';
 
 
 class UserProvider with ChangeNotifier {
-  final SearchUsersByLocation searchUsersByLocation;
-  final SearchUserByUsername searchUsersByUsername;
+  final SearchUsersByLocation searchUsersByLocation = GetIt.instance<SearchUsersByLocation>();
+  final SearchUserByUsername searchUsersByUsername = GetIt.instance<SearchUserByUsername>();
 
   List<UserListEntity> _users = [];
   String _errorMessage = '';
@@ -24,7 +25,7 @@ class UserProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isFetchingMore => _isFetchingMore;
 
-  UserProvider({required this.searchUsersByLocation, required this.searchUsersByUsername});
+ // UserProvider({required this.searchUsersByLocation, required this.searchUsersByUsername});
 
 
   Future<void> searchUsers(BuildContext context, String location) async {
