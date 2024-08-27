@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/use_cases/get_user_detail.dart';
 
 class UserDetailProvider extends ChangeNotifier {
-  final GetUserDetail getUserDetail;
+  final GetUserDetail getUserDetail = GetIt.instance<GetUserDetail>();
 
-  UserDetailProvider({required this.getUserDetail});
+  //UserDetailProvider({required this.getUserDetail});
 
   User? _user;
   User? get user => _user;

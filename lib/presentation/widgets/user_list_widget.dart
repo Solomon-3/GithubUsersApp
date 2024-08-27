@@ -1,4 +1,3 @@
-// presentation/widgets/user_list_widget.dart
 import 'package:flutter/material.dart';
 import '../../domain/entities/user.dart';
 import '../screens/user_profile_screen.dart';
@@ -22,7 +21,7 @@ class UserListWidget extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UserProfileScreen(user: user),
+                builder: (context) => UserProfileScreen(),
               ),
             );
           },
@@ -31,5 +30,3 @@ class UserListWidget extends StatelessWidget {
     );
   }
 }
-
-

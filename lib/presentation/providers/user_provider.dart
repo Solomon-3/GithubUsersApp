@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:dartz/dartz.dart';
+import 'package:get_it/get_it.dart';
+import 'package:githubUsers/domain/entities/user_list_entity.dart';
 import '../../domain/use_cases/search_user_by_location.dart';
-import '../../domain/entities/user.dart';
+//import '../../domain/entities/user.dart';
 import 'internet_provider.dart';
 import 'package:provider/provider.dart';
 import '../../domain/use_cases/search_user_by_username.dart';
 
 
 class UserProvider with ChangeNotifier {
-  final SearchUsersByLocation searchUsersByLocation;
-  final SearchUserByUsername searchUsersByUsername;
-  List<User> _users = [];
+  final SearchUsersByLocation searchUsersByLocation = GetIt.instance<SearchUsersByLocation>();
+  final SearchUserByUsername searchUsersByUsername = GetIt.instance<SearchUserByUsername>();
+
+  List<UserListEntity> _users = [];
   String _errorMessage = '';
   bool _isLoading = false;
   bool _isFetchingMore = false;
   int _page = 1;
 
 
-  List<User> get users => _users;
+  List<UserListEntity> get users => _users;
   String get errorMessage => _errorMessage;
   bool get isLoading => _isLoading;
   bool get isFetchingMore => _isFetchingMore;
 
-  UserProvider({required this.searchUsersByLocation, required this.searchUsersByUsername});
+ // UserProvider({required this.searchUsersByLocation, required this.searchUsersByUsername});
 
 
   Future<void> searchUsers(BuildContext context, String location) async {
@@ -52,7 +55,7 @@ class UserProvider with ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
-  Future<void> searchUserByUsername(BuildContext context, String username) async {
+  Future<void> searchUserByUsername(BuildContext context, String name) async {
     final internetProvider = Provider.of<InternetProvider>(context, listen: false);
     if (!internetProvider.isConnected) {
       _errorMessage = 'No internet connection';
@@ -63,14 +66,14 @@ class UserProvider with ChangeNotifier {
     _errorMessage = '';
     notifyListeners();
 
-    final result = await searchUsersByUsername(username, _page);
+    final result = await searchUsersByUsername(name);
 
     result.fold(
           (exception) {
         _errorMessage = exception.toString();
       },
           (user) {
-        _users = [user];
+        _users = user;
       },
     );
 
